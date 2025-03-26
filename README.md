@@ -1,15 +1,19 @@
-###  DATE: 
+###  DATE: 26-03-2025
 
-###  NAME: 
-###  ROLL NO :
-###  DEPARTMENT: 
+###  NAME: VD Natchathira
+###  ROLL NO :24900864/212224230178
+###  DEPARTMENT: AIDS
 
 
 # EXPERIMENT--02-INTERFACING-A-DIGITAL-INPUT-TO-IOT-DEVELOPMENT-BOARD-
  
 
-## Aim: To Interface a Digital Input  (IR pair ) to ARM IOT development board and write a  program to obtain  the data 
-## Components required: STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
+## Aim:
+To Interface a Digital Input  (IR pair ) to ARM IOT development board and write a  program to obtain  the data 
+
+## Components required:
+STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
+
 ## Theory 
 The full form of an ARM is an advanced reduced instruction set computer (RISC) machine, and it is a 32-bit processor architecture expanded by ARM holdings. The applications of an ARM processor include several microcontrollers as well as processors. The architecture of an ARM processor was licensed by many corporations for designing ARM processor-based SoC products and CPUs. This allows the corporations to manufacture their products using ARM architecture. Likewise, all main semiconductor companies will make ARM-based SOCs such as Samsung, Atmel, TI etc.
 
@@ -48,26 +52,26 @@ The full form of an ARM is an advanced reduced instruction set computer (RISC) m
 8. edit the program and as per required 
 ![image](https://user-images.githubusercontent.com/36288975/226189461-a573e62f-a109-4631-a250-a20925758fe0.png)
 
-9. use project and build all 
+9. use project and build all
 ![image](https://user-images.githubusercontent.com/36288975/226189554-3f7101ac-3f41-48fc-abc7-480bd6218dec.png)
-10. once the project is bulild 
+11. once the project is bulild 
 ![image](https://user-images.githubusercontent.com/36288975/226189577-c61cc1eb-3990-4968-8aa6-aefffc766b70.png)
 
-11. click on debug option 
+12. click on debug option 
 ![image](https://user-images.githubusercontent.com/36288975/226189625-37daa9a3-62e9-42b5-a5ce-2ac63345905b.png)
 
-12. connect the  iot board to power supply and usb 
+13. connect the  iot board to power supply and usb 
 
-13. After connecting open the STM cube programmer 
+14. After connecting open the STM cube programmer 
 ![image](https://user-images.githubusercontent.com/36288975/227599356-9c465b7e-6bd0-436b-b4e8-742ed25e06ce.png)
 
-14. click on UART and click on connect 
+15. click on UART and click on connect 
 ![image](https://user-images.githubusercontent.com/36288975/227599458-26976d4a-f2d4-49f0-a49f-31f46eb15761.png)
 
-15. once it is connected , click on Erasing and programming option 
+16. once it is connected , click on Erasing and programming option 
 ![image](https://user-images.githubusercontent.com/36288975/227599531-f03d277e-440f-4f8a-8875-97f8e8058c71.png)
 
-16. flash the bin or hex file as shown below by switching the switch to flash mode 
+17. flash the bin or hex file as shown below by switching the switch to flash mode 
 
 ![image](https://user-images.githubusercontent.com/36288975/227599656-dc4a635f-b5f1-44c8-84c5-ee0a592fa184.png)
 
@@ -77,13 +81,48 @@ The full form of an ARM is an advanced reduced instruction set computer (RISC) m
 
 
 ## STM 32 CUBE PROGRAM :
+#include "main.h"
+#include "stdbool.h"
+bool IRSENSOR;
+void  IRPAIR();
 
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+
+int main(void)
+{
+   HAL_Init();
+   SystemClock_Config();
+   MX_GPIO_Init();
+   while (1)
+   {
+      IRPAIR();
+   }
+}
+
+void IRPAIR()
+{
+	IRSENSOR=HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4);
+	if(IRSENSOR==0){
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+		HAL_Delay(4000);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+		HAL_Delay(4000);
+	}
+	else {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+		HAL_Delay(1000);
+	}
+}
 
 
 ## Output  :
+![IOT exp 2](https://github.com/user-attachments/assets/5662f186-20e2-4892-9fb5-d0077ba9bfaf)
  
- 
+ ![IOT exp 2 1](https://github.com/user-attachments/assets/a0f3501d-faee-4b99-be38-f432b5b522e2)
+
  
  
 ## Result :
+Interfacing a digital Input (ir pair) with ARM microcontroller based IOT development is executed and the results are verified.
 Interfacing a digital Input (ir pair) with ARM microcontroller based IOT development is executed and the results are verified.
